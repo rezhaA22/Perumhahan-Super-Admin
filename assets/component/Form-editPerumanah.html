@@ -1,0 +1,69 @@
+<template>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Edit perumahan</h5>
+      <form
+        class="row g-3 needs-validation"
+        novalidate
+        @submit.prevent="submitForm"
+      >
+        <div class="col-md-12">
+          <label for="complex_name" class="form-label">Nama Perumahan</label>
+          <input
+            type="text"
+            class="form-control"
+            id="complex_name"
+            v-model="formData.complex_name"
+            required
+          />
+        </div>
+
+        <div class="col-6">
+          <label for="location" class="form-label">Lokasi</label>
+          <input
+            type="text"
+            class="form-control"
+            id="location"
+            placeholder="1234 Main St"
+            v-model="formData.location"
+            required
+          />
+        </div>
+
+        <div class="col-6 mb-12">
+          <label for="inputNumber" class="col-sm-2 col-form-label"
+            >File Upload</label
+          >
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              type="file"
+              id="formFile"
+              required
+              accept="image/*"
+            />
+          </div>
+        </div>
+
+        <div class="col mb-12">
+          <label for="description" class="col-sm-2 col-form-label"
+            >Deskripsi</label
+          >
+          <div class="col-sm-10">
+            <textarea
+              id="description"
+              class="form-control"
+              style="height: 100px"
+              v-model="formData.description"
+              required
+            ></textarea>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
