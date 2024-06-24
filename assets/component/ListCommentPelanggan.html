@@ -1,86 +1,83 @@
 <template>
-    <div class="pagetitle">
-      <h1>Data Tables</h1>
-    </div>
-    <!-- End Page Title -->
+  <div class="Listkomen">
+    <h1>Data Tables</h1>
+  </div>
+  <!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">List Komentar Pelanggan</h5>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">List Komentar Pelanggan</h5>
 
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th><b>Nama Pelanggan</b></th>
-                    <th>Email</th>
-                    <th>Komentar</th>
-                    <th>img</th>
-                    <th>action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="komentar in dataKomentar" :key="komentar.id">
-                    <td>{{ komentar.nama }}</td>
-                    <td>{{ komentar.email }}</td>
-                    <td>{{ komentar.komentar }}</td>
-                    <td>
-                      <img :src="komentar.img" height="35px" alt="User Image" />
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="confirmDelete(komentar.id)"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
-            </div>
-            <!-- modal confirm delete -->
-            <div
-              class="modal fade"
-              id="deleteCommentModal"
-              tabindex="-1"
-              data-bs-backdrop="false"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Delete Komentar</h5>
+            <!-- Table with stripped rows -->
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th><b>Nama Pelanggan</b></th>
+                  <th>Email</th>
+                  <th>Komentar</th>
+                  <th>img</th>
+                  <th>action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="komentar in dataKomentar" :key="komentar.id">
+                  <td>{{ komentar.nama }}</td>
+                  <td>{{ komentar.email }}</td>
+                  <td>{{ komentar.komentar }}</td>
+                  <td>
                     <button
                       type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    yakin ingin ingin hapus komentar dari Unity Pugh?
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
+                      class="btn btn-danger"
+                      @click="confirmDelete(komentar.id)"
                     >
-                      Close
+                      Delete
                     </button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                  </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+          </div>
+          <!-- modal confirm delete -->
+          <div
+            class="modal fade"
+            id="deleteCommentModal"
+            tabindex="-1"
+            data-bs-backdrop="false"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete Komentar</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  yakin ingin ingin hapus komentar dari Unity Pugh?
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-danger">Delete</button>
                 </div>
               </div>
             </div>
-            <!-- End modal confirm delete -->
           </div>
+          <!-- End modal confirm delete -->
         </div>
       </div>
-    </section>
-  </template>
+    </div>
+  </section>
+</template>

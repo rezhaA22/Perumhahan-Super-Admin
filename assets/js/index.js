@@ -634,6 +634,69 @@
         },
     };
 
+    const Listkomen= {
+
+        template: await loadcomponent("./assets/component/ListCommentPelanggan.html"),
+        data() {
+            return {
+                dataKomentar: [],
+                error: null,
+            };
+        },
+        async mounted() {
+            try {
+                this.dataKomentar = await this.getData()
+                console.log(this.dataKomentar);
+
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        watch: {
+            dataKomentar() {
+                this.$nextTick(this.initDatatable);
+            }
+        },
+        methods: {
+            initDatatable() {
+                const datatables = select(".datatable", true);
+                datatables.forEach((datatable) => {
+                    new simpleDatatables.DataTable(datatable, {
+                        perPageSelect: [5, 10, 15, ["All", -1]],
+                        columns: [
+                            {
+                                select: 2,
+                                sortSequence: ["desc", "asc"],
+                            },
+                            {
+                                select: 3,
+                                sortSequence: ["desc"],
+                            },
+                            {
+                                select: 4,
+                                cellClass: "green",
+                                headerClass: "red",
+                            },
+                        ],
+                    });
+                });
+            },
+            async getData() {
+                const url = `${baseurl}/review`
+                const res = await fetch(url, {
+                    headers: {
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZXAxMSIsInVzZXJJZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTkyMjY1MDYsImV4cCI6MTcxOTI1NTMwNn0.kLe5qZwUld7a3R2nANF3gJkWYbpjU8jd-zwn3K3sZmA'
+                    }
+                })
+                if (!res.ok) {
+                    throw new Error(`Error fetching data: ${res.statusText}`);
+                }
+
+                return await res.json()
+            }
+        },
+    };
+
     // Define Routes
     const routes = [
         { path: "/dashboard", component: Dashboard },
@@ -650,6 +713,7 @@
         { path: "/Listpengelola", component: listPlengelola },
         { path: "/Addpengelola", component: AddPengelola },
         { path: "/EditdPengelola", component: EditPengelola },
+        { path: "/Listkomen", component: Listkomen },
     ];
 
     // Create Router Instance
