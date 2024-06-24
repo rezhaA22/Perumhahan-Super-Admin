@@ -29,8 +29,8 @@
       .left-section {
         background: linear-gradient(
           to bottom,
-          #9c27b0,
-          #673ab7
+          #2196f3,
+          #2156f3
         ); /* Gradient purple */
         padding: 3rem;
         flex: 1;
@@ -72,8 +72,7 @@
         height: 45px;
         border-radius: 8px;
         transition: all 0.3s ease-in-out;
-        background-color: #9c27b0; /* Button color */
-        border-color: #9c27b0;
+        background-color: #2196f3, #2156f3;
         color: white; /* Text color for the button */
       }
       .right-section .btn:hover {
@@ -91,7 +90,7 @@
       .register {
         font-size: 0.9rem;
         text-decoration: none;
-        color: #9c27b0; /* Link color */
+        color: #2196f3; /* Link color */
         transition: all 0.3s ease-in-out;
       }
       .forgot-password:hover,
@@ -109,13 +108,13 @@
         <div class="logo">
           <img src="Logo.png" alt="Admin Logo" />
         </div>
-        <h1>Welcome Admin!</h1>
+        <h1>Welcome Super_Admin!</h1>
         <p>Manage your system efficiently.</p>
       </div>
       <div class="right-section">
         <h2>Admin Sign in</h2>
-        <p class="text-muted">Welcome to Admin Portal.</p>
-        <form>
+        <p class="text-muted">Welcome to Super Admin Portal.</p>
+        <form id="loginform">
           <input
             type="text"
             class="form-control"
@@ -159,5 +158,39 @@
         </form>
       </div>
     </div>
+
+    <script>
+      const loginForm = document.getElementById("loginform");
+
+      loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(loginForm);
+        const formDataObject = Object.fromEntries(formData.entries());
+
+        try {
+          const response = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formDataObject),
+          });
+
+          if (!response.ok) {
+            const errorMessage = await response.json();
+            throw new Error(errorMessage.message || "Failed to log in");
+          }
+
+          const { token } = await response.json();
+          // Handle successful login (e.g., save token to localStorage, redirect)
+          localStorage.setItem("token", token);
+          window.location.href = "./"; // Replace with your logic (redirect, etc.)
+        } catch (error) {
+          console.error("Login failed:", error.message);
+          alert("Login failed. Please try again."); // Replace with your error handling
+        }
+      });
+    </script>
   </body>
 </html>
