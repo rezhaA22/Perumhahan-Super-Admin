@@ -218,6 +218,14 @@
             </router-link>
           </li>
           <!-- End List Rumah Nav -->
+          <!-- list coment -->
+          <li class="nav-item">
+            <router-link to="/List-Komentar" class="nav-link collapsed">
+              <i class="bi bi-layout-text-window-reverse"></i>
+              <span>List Komentar</span>
+            </router-link>
+          </li>
+          <!-- end list coment -->
         </ul>
       </aside>
 
@@ -268,6 +276,7 @@
     <script>
       (async () => {
         console.log("ok");
+        const baseurl = "http://localhost:3000";
 
         // Define Components
         const Dashboard = {
@@ -520,6 +529,39 @@
           template: "<div><h2>List Rumah</h2><p>List of Rumah.</p></div>",
         };
 
+        const ListComent = {
+          data() {
+            return {
+              dataKomentar: null,
+              error: null,
+            };
+          },
+          template: await loadcomponent(
+            "./assets/component/ListCommentPelanggan.html"
+          ),
+          async mounted() {
+            this.dataKomentar = await this.getdata();
+            console.log(this.dataKomentar)
+          },
+          methods: {
+            async getdata(route, params = {}) {
+              try {
+                let url = `${baseurl}/review/`; // Base URL for the reviews API
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                  throw new Error(
+                    `Error fetching data: ${response.statusText}`
+                  );
+                }
+                return await response.json();
+              } catch (error) {
+                console.error("Failed to fetch data:", error);
+              }
+            },
+          },
+        };
+
         // Define Routes
         const routes = [
           { path: "/dashboard", component: Dashboard },
@@ -530,6 +572,7 @@
           { path: "/TambahAdmin", component: TambahAdmin },
           { path: "/LogAdmin", component: LogAdmin },
           { path: "/ListRumah", component: ListRumah },
+          { path: "/List-Komentar", component: ListComent },
         ];
 
         // Create Router Instance
