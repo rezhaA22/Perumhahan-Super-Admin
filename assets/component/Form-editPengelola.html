@@ -1,0 +1,55 @@
+<template>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">edit pengelola</h5>
+      <form
+        class="row g-3 needs-validation"
+        novalidate
+        @submit.prevent="submitForm"
+      >
+        <div class="col-md-12">
+          <label for="complex_name" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="complex_name"
+            v-model="formData.username"
+            required
+          />
+        </div>
+
+        <div class="col-6">
+          <label for="location" class="form-label">harga</label>
+          <input
+            type="number"
+            class="form-control"
+            id="location"
+            placeholder="1234"
+            v-model="formData.harga"
+            required
+          />
+        </div>
+
+        <div class="col-md-6">
+          <label for="inputState" class="form-label">Rumah</label>
+          <select
+            id="inputState"
+            class="form-select"
+            v-model="formData.rumah"
+            required
+          >
+            <option disabled value="">Choose...</option>
+            <option value="1">Perumahan/ type rumah 1</option>
+            <option>Perumahan/ type rumah 2</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>

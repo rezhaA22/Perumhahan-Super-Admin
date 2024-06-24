@@ -211,6 +211,79 @@
           </li>
           <!--end admin nav -->
 
+          <!-- Sales nav -->
+          <li class="nav-item">
+            <a
+              class="nav-link collapsed"
+              data-bs-target="#sales-nav"
+              data-bs-toggle="collapse"
+              href="#"
+            >
+              <i class="bx bxl-shopify"></i><span>Sales</span
+              ><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+              id="sales-nav"
+              class="nav-content collapse"
+              data-bs-parent="#sidebar-nav"
+            >
+              <li>
+                <router-link
+                  to="/ListSales"
+                  onclick="return sidebarActive(this)"
+                >
+                  <i class="bi bi-circle"></i><span>List Sales</span>
+                </router-link>
+              </li>
+
+              <li>
+                <router-link
+                  to="/AddSales"
+                  onclick="return sidebarActive(this)"
+                >
+                  <i class="bi bi-circle"></i><span>Add sales</span>
+                </router-link>
+              </li>
+            </ul>
+          </li>
+          <!--end Sales nav -->
+          <!-- pegelola nav -->
+          <li class="nav-item">
+            <a
+              class="nav-link collapsed"
+              data-bs-target="#pengelola-nav"
+              data-bs-toggle="collapse"
+              href="#"
+            >
+              <i class="bx bxl-shopify"></i><span>pengelola</span
+              ><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+              id="pengelola-nav"
+              class="nav-content collapse"
+              data-bs-parent="#sidebar-nav"
+            >
+              <li>
+                <router-link
+                  to="/ListPengelola"
+                  onclick="return sidebarActive(this)"
+                >
+                  <i class="bi bi-circle"></i><span>List pengelola</span>
+                </router-link>
+              </li>
+
+              <li>
+                <router-link
+                  to="/Addpengelola"
+                  onclick="return sidebarActive(this)"
+                >
+                  <i class="bi bi-circle"></i><span>Add pengelola</span>
+                </router-link>
+              </li>
+            </ul>
+          </li>
+          <!--end Sales nav -->
+
           <li class="nav-item">
             <router-link to="/ListRumah" class="nav-link collapsed">
               <i class="bi bi-layout-text-window-reverse"></i>
@@ -273,319 +346,8 @@
     <script src="assets/js/myScript.js"></script>
 
     <!-- <script src="assets/js/calcomponent.js"></script> -->
-    <script>
-      (async () => {
-        console.log("ok");
-        const baseurl = "http://localhost:3000";
 
-        // Define Components
-        const Dashboard = {
-          data() {
-            return {
-              judul: "dasboard",
-            };
-          },
-          template: await loadcomponent("./assets/component/Dasboard.html"),
-          mounted() {
-            // Panggil fungsi resize echart ketika komponen selesai dimuat
-            this.addchart();
-            this.autoSizeChart();
-          },
+    <script src="./assets/js/index.js"></script>
 
-          methods: {
-            addchart() {
-              var budgetChart = echarts
-                .init(document.querySelector("#budgetChart"))
-                .setOption({
-                  legend: {
-                    data: ["Allocated Budget", "Actual Spending"],
-                  },
-                  radar: {
-                    // shape: 'circle',
-                    indicator: [
-                      {
-                        name: "Sales",
-                        max: 6500,
-                      },
-                      {
-                        name: "Administration",
-                        max: 16000,
-                      },
-                      {
-                        name: "Information Technology",
-                        max: 30000,
-                      },
-                      {
-                        name: "Customer Support",
-                        max: 38000,
-                      },
-                      {
-                        name: "Development",
-                        max: 52000,
-                      },
-                      {
-                        name: "Marketing",
-                        max: 25000,
-                      },
-                    ],
-                  },
-                  series: [
-                    {
-                      name: "Budget vs spending",
-                      type: "radar",
-                      data: [
-                        {
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: "Allocated Budget",
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: "Actual Spending",
-                        },
-                      ],
-                    },
-                  ],
-                });
-            },
-            autoSizeChart() {
-              console.log("okok");
-              new ResizeObserver(function () {
-                select(".echart", true).forEach((getEchart) => {
-                  echarts.getInstanceByDom(getEchart).resize();
-                });
-              }).observe(select("#main"));
-              console.log("okok");
-            },
-          },
-        };
-        const ListPerumahan = {
-          template: await loadcomponent(
-            "./assets/component/List-perumahan.html"
-          ),
-          mounted() {
-            this.initDatatable();
-          },
-          methods: {
-            initDatatable() {
-              const datatables = select(".datatable", true);
-              datatables.forEach((datatable) => {
-                new simpleDatatables.DataTable(datatable, {
-                  perPageSelect: [5, 10, 15, ["All", -1]],
-                  columns: [
-                    {
-                      select: 2,
-                      sortSequence: ["desc", "asc"],
-                    },
-                    {
-                      select: 3,
-                      sortSequence: ["desc"],
-                    },
-                    {
-                      select: 4,
-                      cellClass: "green",
-                      headerClass: "red",
-                    },
-                  ],
-                });
-              });
-            },
-          },
-        };
-        const Tambahperumahan = {
-          template: await loadcomponent(
-            "./assets/component/Form-addPerumanah.html"
-          ),
-
-          data() {
-            return {
-              formData: {
-                complex_name: "",
-                location: "",
-                description: "",
-              },
-              error: null,
-            };
-          },
-          mounted() {
-            this.initValidate();
-          },
-          methods: {
-            submitForm() {
-              // submint action
-            },
-            initValidate() {
-              const needsValidation =
-                document.querySelectorAll(".needs-validation");
-
-              Array.prototype.slice
-                .call(needsValidation)
-                .forEach(function (form) {
-                  form.addEventListener(
-                    "submit",
-                    function (event) {
-                      if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                      }
-
-                      form.classList.add("was-validated");
-                    },
-                    false
-                  );
-                });
-            },
-          },
-        };
-        const Editperumahan = {
-          template: await loadcomponent(
-            "./assets/component/Form-editPerumanah.html"
-          ),
-
-          data() {
-            return {
-              formData: {
-                complex_name: "",
-                location: "",
-                description: "",
-              },
-              error: null,
-            };
-          },
-          mounted() {
-            this.initValidate();
-          },
-          methods: {
-            submitForm() {
-              if (!this.formData.complex_name) {
-                this.errorMessage = "Nama Perumahan harus diisi.";
-                return;
-              } else {
-                this.errorMessage = ""; // Menghapus pesan kesalahan jika input valid
-              }
-            },
-            initValidate() {
-              const needsValidation =
-                document.querySelectorAll(".needs-validation");
-
-              Array.prototype.slice
-                .call(needsValidation)
-                .forEach(function (form) {
-                  form.addEventListener(
-                    "submit",
-                    function (event) {
-                      if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                      }
-
-                      form.classList.add("was-validated");
-                    },
-                    false
-                  );
-                });
-            },
-          },
-        };
-
-        const ListAdmin = {
-          template: "<div><h2>list Admin</h2><p>List Admin.</p></div>",
-        };
-        const TambahAdmin = {
-          template: "<div><h2>Tambah Admin</h2><p>Tambah Admin.</p></div>",
-        };
-        const LogAdmin = {
-          template: await loadcomponent("./assets/component/Log-admin.html"),
-          mounted() {
-            this.initDatatable();
-          },
-          methods: {
-            initDatatable() {
-              const datatables = select(".datatable", true);
-              datatables.forEach((datatable) => {
-                new simpleDatatables.DataTable(datatable, {
-                  perPageSelect: [5, 10, 15, ["All", -1]],
-                  columns: [
-                    {
-                      select: 2,
-                      sortSequence: ["desc", "asc"],
-                    },
-                    {
-                      select: 3,
-                      sortSequence: ["desc"],
-                    },
-                    {
-                      select: 4,
-                      cellClass: "green",
-                      headerClass: "red",
-                    },
-                  ],
-                });
-              });
-            },
-          },
-        };
-
-        const ListRumah = {
-          template: "<div><h2>List Rumah</h2><p>List of Rumah.</p></div>",
-        };
-
-        const ListComent = {
-          data() {
-            return {
-              dataKomentar: null,
-              error: null,
-            };
-          },
-          template: await loadcomponent(
-            "./assets/component/ListCommentPelanggan.html"
-          ),
-          async mounted() {
-            this.dataKomentar = await this.getdata();
-            console.log(this.dataKomentar)
-          },
-          methods: {
-            async getdata(route, params = {}) {
-              try {
-                let url = `${baseurl}/review/`; // Base URL for the reviews API
-
-                const response = await fetch(url);
-                if (!response.ok) {
-                  throw new Error(
-                    `Error fetching data: ${response.statusText}`
-                  );
-                }
-                return await response.json();
-              } catch (error) {
-                console.error("Failed to fetch data:", error);
-              }
-            },
-          },
-        };
-
-        // Define Routes
-        const routes = [
-          { path: "/dashboard", component: Dashboard },
-          { path: "/ListPerumahan", component: ListPerumahan },
-          { path: "/Tambahperumahan", component: Tambahperumahan },
-          { path: "/Editperumahan", component: Editperumahan },
-          { path: "/ListAdmin", component: ListAdmin },
-          { path: "/TambahAdmin", component: TambahAdmin },
-          { path: "/LogAdmin", component: LogAdmin },
-          { path: "/ListRumah", component: ListRumah },
-          { path: "/List-Komentar", component: ListComent },
-        ];
-
-        // Create Router Instance
-        const router = new VueRouter({
-          routes,
-        });
-        router.push("/dashboard");
-        // obj vue
-        new Vue({
-          el: "#app",
-          router,
-        });
-      })();
-    </script>
   </body>
 </html>
