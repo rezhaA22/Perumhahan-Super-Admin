@@ -1,4 +1,4 @@
-<template>
+<tamplat>
   <div class="Listkomen">
     <h1>Data Tables</h1>
   </div>
@@ -18,20 +18,24 @@
                   <th><b>Nama Pelanggan</b></th>
                   <th>Email</th>
                   <th>Komentar</th>
-                  <th>img</th>
                   <th>action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="komentar in dataKomentar" :key="komentar.id">
-                  <td>{{ komentar.nama }}</td>
-                  <td>{{ komentar.email }}</td>
-                  <td>{{ komentar.komentar }}</td>
+                <tr
+                  v-for="komentar,idx in dataKomentar"
+                  :key="komentar.review_id"
+                >
+                  <td>{{ komentar.user.full_name }}</td>
+                  <td>{{ komentar.user.email }}</td>
+                  <td>{{ komentar.comment }}</td>
                   <td>
                     <button
                       type="button"
                       class="btn btn-danger"
-                      @click="confirmDelete(komentar.id)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#disablebackdrop"
+                      @click="select(idx)"
                     >
                       Delete
                     </button>
@@ -44,7 +48,7 @@
           <!-- modal confirm delete -->
           <div
             class="modal fade"
-            id="deleteCommentModal"
+            id="disablebackdrop"
             tabindex="-1"
             data-bs-backdrop="false"
           >
@@ -70,7 +74,14 @@
                   >
                     Close
                   </button>
-                  <button type="button" class="btn btn-danger">Delete</button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                    @click="delet()"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -80,4 +91,4 @@
       </div>
     </div>
   </section>
-</template>
+</tamplat>

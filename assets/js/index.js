@@ -634,7 +634,7 @@
         },
     };
 
-    const Listkomen= {
+    const Listkomen = {
 
         template: await loadcomponent("./assets/component/ListCommentPelanggan.html"),
         data() {
@@ -682,7 +682,7 @@
                 });
             },
             async getData() {
-                const url = `${baseurl}/review`
+                const url =` ${baseurl}/review`
                 const res = await fetch(url, {
                     headers: {
                         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZXAxMSIsInVzZXJJZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTkyMjY1MDYsImV4cCI6MTcxOTI1NTMwNn0.kLe5qZwUld7a3R2nANF3gJkWYbpjU8jd-zwn3K3sZmA'
@@ -693,7 +693,31 @@
                 }
 
                 return await res.json()
-            }
+            },
+            select(index) {
+                this.selected = index
+                console.log(this.selected);
+            },
+            async delet() {
+                try {
+
+                    const data = this.dataKomentar[this.selected]
+                    const url = `${baseurl}/review/superadmin_delete_review/${data.review_id}`
+                    const res = await fetch(url, {
+                        method: "delete",
+                        headers: {
+                            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZXAxMSIsInVzZXJJZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTkyMjY1MDYsImV4cCI6MTcxOTI1NTMwNn0.kLe5qZwUld7a3R2nANF3gJkWYbpjU8jd-zwn3K3sZmA'
+                        }
+                    })
+                    if (!res.ok) {
+                        throw new Error(`Error fetching data: ${res.statusText}`);
+                    }
+                    this.dataKomentar.splice(this.selected, 1)
+                    this.selected = null
+                } catch (error) {
+                    alert(`gagal ${error}`)
+                }
+            },
         },
     };
 
