@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background: #f5f5f5; /* Background color */
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .login-container {
+        background-color: #f0f0f0; /* Container background color */
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: flex;
+        max-width: 1000px;
+        width: 100%;
+      }
+      .left-section {
+        background: linear-gradient(
+          to bottom,
+          #9c27b0,
+          #673ab7
+        ); /* Gradient purple */
+        padding: 3rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+      .left-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      .left-section p {
+        font-size: 1.25rem;
+        max-width: 300px;
+        text-align: center;
+      }
+      .right-section {
+        padding: 3rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #f0f0f0; /* Background color for the right section */
+      }
+      .right-section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #333; /* Text color for the right section */
+      }
+      .right-section .form-control {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        height: 45px;
+        border-color: #ccc; /* Border color for form controls */
+      }
+      .right-section .btn {
+        height: 45px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+        background-color: #9c27b0; /* Button color */
+        border-color: #9c27b0;
+        color: white; /* Text color for the button */
+      }
+      .right-section .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .form-check-label {
+        font-size: 0.9rem;
+        color: #666; /* Text color for form check label */
+      }
+      .form-check-input {
+        margin-top: 0.3rem;
+      }
+      .forgot-password,
+      .register {
+        font-size: 0.9rem;
+        text-decoration: none;
+        color: #9c27b0; /* Link color */
+        transition: all 0.3s ease-in-out;
+      }
+      .forgot-password:hover,
+      .register:hover {
+        text-decoration: underline;
+      }
+      .logo img {
+        max-width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="left-section">
+        <div class="logo">
+          <img src="Logo.png" alt="Admin Logo" />
+        </div>
+        <h1>Welcome Admin!</h1>
+        <p>Manage your system efficiently.</p>
+      </div>
+      <div class="right-section">
+        <h2>Admin Sign in</h2>
+        <p class="text-muted">Welcome to Admin Portal.</p>
+        <form>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            id="username"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              name="rememberMe"
+              id="rememberMe"
+            />
+            <label class="form-check-label" for="rememberMe">
+              Remember me
+            </label>
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit">Sign in</button>
+          </div>
+          <div class="mt-3">
+            <a href="#!" class="forgot-password">Forgot Password?</a>
+          </div>
+          <div class="mt-3">
+            <p>
+              Don't have an account?
+              <a href="#!" class="register">Sign up</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
