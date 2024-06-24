@@ -531,20 +531,20 @@
                     formData.append("complex_id", this.formData.perumahan);
                     formData.append("username", this.formData.username);
                     console.log(formData.toString());
-                    const res = await fetch(`${baseurl}/pengelola`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZXAxMSIsInVzZXJJZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTkyMjY1MDYsImV4cCI6MTcxOTI1NTMwNn0.kLe5qZwUld7a3R2nANF3gJkWYbpjU8jd-zwn3K3sZmA`,
-                        },
-                        body: formData.toString(),
-                    });
-                    if (res.ok) {
-                        alert("ok");
-                    } else {
-                        const errorData = await res.json();
-                        alert(`bad ${errorData.message}`);
-                    }
+                    // const res = await fetch(`${baseurl}/pengelola`, {
+                    //     method: "POST",
+                    //     headers: {
+                    //         "Content-Type": "application/x-www-form-urlencoded",
+                    //         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZXAxMSIsInVzZXJJZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTkyMzA4NDIsImV4cCI6MTcxOTI1OTY0Mn0.yDal7kRhte4IejERx2lURkRYX09viWthE9sbLsuzCsU`,
+                    //     },
+                    //     body: formData.toString(),
+                    // });
+                    // if (res.ok) {
+                    //     alert("ok");
+                    // } else {
+                    //     const errorData = await res.json();
+                    //     alert(`bad ${errorData.message}`);
+                    // }
                 } catch (error) {
                     console.log(error);
                     alert(`error ${error.message}`);
@@ -575,7 +575,7 @@
                 const url = `${baseurl}/perumahan/getAll`
                 const res = await fetch(url, {
                     headers: {
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZXAxMSIsInVzZXJJZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTkyMjY1MDYsImV4cCI6MTcxOTI1NTMwNn0.kLe5qZwUld7a3R2nANF3gJkWYbpjU8jd-zwn3K3sZmA'
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZXAxMSIsInVzZXJJZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTkyMzA4NDIsImV4cCI6MTcxOTI1OTY0Mn0.yDal7kRhte4IejERx2lURkRYX09viWthE9sbLsuzCsU'
                     }
                 })
                 if (!res.ok) {
